@@ -28,6 +28,6 @@ export class Console {
     
     public clear(): void {
         this.lines.length = 0;
-        this.lines.push("Consoled cleared.");
+        this.lines.push("Console cleared.");
     }
 } 
