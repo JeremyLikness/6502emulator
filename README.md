@@ -11,6 +11,8 @@ because not all op codes are implemented and the binary-packed decimal tests fai
 The emulator features a full assembler/compiler with support for labels, a disassembler, a memory dump, and enables you to debug and 
 step through programs. 
 
+![Screenshot](./screenshot.png?raw=true)
+
 ## Getting Started 
 
 Navigate to the parent directory of the location you wish to place the project (it will create the `6502emulator` folder for you).
