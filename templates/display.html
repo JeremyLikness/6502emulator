@@ -1,0 +1,10 @@
+<div class="column">&nbsp;</div>
+<div class="column">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" [attr.width]="canvasWidth" [attr.height]="canvasHeight">
+        <rect x="0" y="0" [attr.width]="canvasWidth" [attr.height]="canvasHeight" 
+                style="fill:white;"/>
+        <rect *ngFor="#pixel of pixelBuffer" [attr.x]="pixel.x" [attr.y]="pixel.y"
+            [attr.width]="pixel.width" [attr.height]="pixel.height" [style.fill]="pixel.fill"/>
+    </svg>
+</div>
+<div class="column">&nbsp;</div>

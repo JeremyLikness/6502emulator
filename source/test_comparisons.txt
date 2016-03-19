@@ -1,0 +1,95 @@
+; Test the signed compare routine
+;
+; Returns with ERROR = 0 if the test passes, ERROR = 1 if the test fails
+;
+; Three (additional) memory locations are used: ERROR, N1, and N2
+; These may be located anywhere convenient in RAM
+;
+TEST:    CLD        ; Clear decimal mode for test
+       LDA #1
+       STA ERROR  ; Store 1 in ERROR until test passes
+       TSX        ; Save stack pointer so subroutines can exit with ERROR = 1
+;
+; Test N1 positive, N2 positive
+;
+       LDA #$00   ; 0
+       STA N1
+PP1:     LDA #$00   ; 0
+       STA N2
+PP2:     JSR SUCMP  ; Verify that the signed and unsigned comparison agree
+       INC N2
+       BPL PP2
+       INC N1
+       BPL PP1
+;
+; Test N1 positive, N2 negative
+;
+       LDA #$00   ; 0
+       STA N1
+PN1:     LDA #$80   ; -128
+       STA N2
+PN2:     JSR SCMP   ; Signed comparison
+       BMI TEST1  ; if N1 (positive) < N2 (negative) exit with ERROR = 1
+       INC N2
+       BMI PN2
+       INC N1
+       BPL PN1
+;
+; Test N1 negative, N2 positive
+;
+       LDA #$80   ; -128
+       STA N1
+NP1:     LDA #$00   ; 0
+       STA N2
+NP2:     JSR SCMP   ; Signed comparison
+       BPL TEST1  ; if N1 (negative) >= N2 (positive) exit with ERROR = 1
+       INC N2
+       BPL NP2
+       INC N1
+       BMI NP1
+;
+; Test N1 negative, N2 negative
+;
+       LDA #$80   ; -128
+       STA N1
+NN1:     LDA #$80   ; -128
+       STA N2
+NN2:     JSR SUCMP  ; Verify that the signed and unsigned comparisons agree
+       INC N2
+       BMI NN2
+       INC N1
+       BMI NN1
+
+       LDA #0
+       STA ERROR  ; All tests pass, so store 0 in ERROR
+TEST1:  LDA ERROR 
+       RTS
+
+; Signed comparison
+;
+; Returns with:
+;   N=0 (BPL branches) if N1 >= N2 (signed)
+;   N=1 (BMI branches) if N1 < N2 (signed)
+;
+; The unsigned comparison result is returned in the C flag (for free)
+;
+SCMP:    SEC
+       LDA N1     ; Compare N1 and N2
+       SBC N2
+       BVC SCMP1  ; Branch if V = 0
+       EOR #$80   ; Invert Accumulator bit 7 (which also inverts the N flag)
+SCMP1:   RTS
+
+; Test the signed and unsigned comparisons to confirm that they agree
+;
+SUCMP:   JSR SCMP   ; Signed (and unsigned) comparison
+       BCC SUCMP2 ; Branch if N1 < N2 (unsigned)
+       BPL SUCMP1 ; N1 >= N2 (unsigned), branch if N1 >= N2 (signed)
+       TSX        ; reset stack and exit with ERROR = 1
+SUCMP1:  RTS
+SUCMP2:  BMI SUCMP3 ; N1 < N2 (unsigned), branch if N1 < N2 (signed)
+       TSX        ; reset stack and exit with ERROR = 1
+SUCMP3:  RTS
+ERROR: NOP 
+N1: NOP
+N2: NOP

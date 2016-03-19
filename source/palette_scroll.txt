@@ -1,0 +1,85 @@
+; scrolling palette 
+* = $FC00
+videobase:
+* = $FFFF 
+lastvideobyte: 
+* = $0200
+start: 
+LDA #$00
+STA lastvideobyte
+scroll_loop:
+LDX #$00
+LDY lastvideobyte ; get highest value to increment
+INY 
+move_loop:
+second_row = videobase + 32
+LDA second_row, X 
+STA videobase, X 
+LDA $FC40, X 
+STA $FC20, X 
+LDA $FC60, X 
+STA $FC40, X 
+LDA $FC80, X 
+STA $FC60, X 
+LDA $FCa0, X 
+STA $FC80, X 
+LDA $FCc0, X 
+STA $FCa0, X 
+LDA $FCe0, X 
+STA $FCc0, X 
+LDA $FD00, X 
+STA $FCe0, X 
+LDA $FD20, X 
+STA $FD00, X 
+LDA $Fd40, X 
+STA $Fd20, X 
+LDA $Fd60, X 
+STA $Fd40, X 
+LDA $Fd80, X 
+STA $Fd60, X 
+LDA $Fda0, X 
+STA $Fd80, X 
+LDA $Fdc0, X 
+STA $Fda0, X 
+LDA $Fde0, X 
+STA $Fdc0, X 
+LDA $Fe00, X 
+STA $Fde0, X 
+LDA $Fe20, X 
+STA $Fe00, X 
+LDA $Fe40, X 
+STA $Fe20, X 
+LDA $Fe60, X 
+STA $Fe40, X 
+LDA $Fe80, X 
+STA $Fe60, X 
+LDA $Fea0, X 
+STA $Fe80, X 
+LDA $Fec0, X 
+STA $Fea0, X 
+LDA $Fee0, X 
+STA $Fec0, X 
+LDA $Ff00, X 
+STA $Fee0, X 
+LDA $Ff20, X 
+STA $Ff00, X 
+LDA $Ff40, X 
+STA $Ff20, X 
+LDA $Ff60, X 
+STA $Ff40, X 
+LDA $Ff80, X 
+STA $Ff60, X 
+LDA $Ffa0, X 
+STA $Ff80, X 
+LDA $Ffc0, X 
+STA $Ffa0, X 
+LDA $Ffe0, X 
+STA $Ffc0, X 
+TYA 
+STA $FFe0, x 
+INX 
+CPX #$20 
+BNE final_loop ; do it this way because branch only goes 127 bytes
+jmp scroll_loop
+final_loop:
+jmp move_loop

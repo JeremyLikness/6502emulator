@@ -1,0 +1,51 @@
+body
+{
+    font-family: 'Segoe UI', sans-serif
+}
+
+table 
+{
+    width: 460px;    
+}
+
+th 
+{
+    font-weight: bold;
+    margin: 5px;    
+}
+
+td 
+{
+    background: lightgray;
+    margin: 10px;
+    padding: 5px;
+    min-width: 50px;
+    text-align: right;
+    font-family: consolas, courier, sans-serif
+}
+
+textarea 
+{
+    text-align: left;
+    width: 500px;
+    height: 400px;   
+}
+
+div.column 
+{
+    float: left;
+    padding-right: 10px;     
+}
+
+div.console 
+{
+    overflow: auto;
+    font-family: consolas, courier, sans-serif;
+    font-size: 12px;
+    background: black;
+    color: cyan;
+    width: 400px;
+    height: 400px;
+    text-overflow: normal;
+    padding: 2px;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "6502emulator",
+  "version": "1.0.0",
+  "description": "A 6502 emulator written in TypeScript and Angular 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\""
+  },
+  "dependencies" : {
+      "angular2" : "2.0.0-beta.10",
+      "systemjs" : "0.19.24",
+      "es6-promise": "3.1.2",
+      "es6-shim": "^0.33.3",
+      "reflect-metadata": "0.1.2",
+      "rxjs": "5.0.0-beta.2", 
+      "zone.js" : "0.6.4"
+  },
+  "devDependencies": {
+      "concurrently" : "2.0.0",
+      "lite-server" : "2.1.0",
+      "typescript" : "1.8.9"
+  },
+  "author": "Jeremy Likness",
+  "license": "MIT"
+}

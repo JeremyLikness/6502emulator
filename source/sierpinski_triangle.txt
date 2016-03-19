@@ -1,0 +1,47 @@
+; sierpenski triangle
+; adapted from source code posted by "anonymous" at http://6502asm.com/ 
+
+* = $fbe1
+videoStart:
+
+* = $fc00
+videoBank_a:
+* = $fd00
+videoBank_b:
+* = $fe00
+videoBank_c:
+* = $ff00 
+videoBank_d: 
+
+* = $0200
+start:
+
+ lda #<videoStart
+ sta $0
+ lda #>videoStart
+ sta $1
+ ldy #$20
+
+write:
+
+ ldx #$00
+ eor ($0, x)
+ sta ($0),y
+
+ inc $0
+ bne write
+ inc $1
+ bne write
+
+ ldx #$00  
+
+; fix up palette
+update_loop: 
+ inc videobank_a, x
+ inc videobank_b, x
+ inc videobank_c, x
+ inc videobank_d, x
+ inx
+ bne update_loop
+
+ rts

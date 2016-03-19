@@ -1,0 +1,24 @@
+<div class="column">
+    <table>
+        <tr><th>PC</th><th>SP</th><th>A</th><th>X</th><th>Y</th><td>NV-BDIZC</td><th>Runtime</th><th>IPS</th></tr>
+        <tr>
+            <td>{{cpu.rPC | hexadecimal}}</td>
+            <td>{{cpu.rSP | hexadecimal}}</td>
+            <td>{{cpu.rA | hexadecimal}}</td>
+            <td>{{cpu.rX | hexadecimal}}</td>
+            <td>{{cpu.rY | hexadecimal}}</td> 
+            <td>{{cpu.rP | eightbits}}</td> 
+            <td>{{cpu.elapsedMilliseconds / 1000}}</td>               
+            <td>{{cpu.instructionsPerSecond}}</td>               
+        </tr>
+    </table> 
+    <div>&nbsp;</div>
+            <button (click)="cpu.reset()">Reset</button>&nbsp;
+            <button (click)="cpu.halt()" [disabled]="cpu.errorState || !cpu.runningState">Halt</button>
+            <button (click)="cpu.stop()" [disabled]="cpu.errorState || !cpu.runningState">Pause</button>        
+            <button (click)="cpu.run()" [disabled]="cpu.runningState || cpu.errorState">Run</button>
+            <input type="checkbox" [(ngModel)]="cpu.autoRefresh"/>Refresh&nbsp;
+            <input type="checkbox" [(ngModel)]="cpu.debug"/>Debug
+            <button (click)="cpu.step()" [disabled]="cpu.runningState || cpu.errorState || !cpu.debug">Step</button>
+            <div>&nbsp;</div>          
+</div>

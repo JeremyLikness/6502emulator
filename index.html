@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>6502 Emulator Written with TypeScript and Angular 2</title>
+        <link rel="stylesheet" href="emulator.css" type="text/css"/>
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+        <script src="node_modules/angular2/bundles/upgrade.dev.js"></script>
+    </head>
+    <body>
+        <script>
+            System.config({
+                packages: {
+                    app: {
+                        format: "register",
+                        defaultExtension: "js"
+                    }
+                }
+            })
+            System.import('app/app')
+            .then(null, console.error.bind(console));
+         </script>   
+         <emulator>Loading...</emulator>         
+    </body>
+</html>
