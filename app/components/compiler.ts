@@ -1,5 +1,8 @@
 import {Component, Inject} from 'angular2/core';
 import {FORM_DIRECTIVES, ControlGroup, FormBuilder, Validators, Control, AbstractControl} from 'angular2/common';
+import {Http} from 'angular2/http';
+
+import 'rxjs/Rx';
 
 import {Hexadecimal} from '../pipes/hexadecimal';
 import {ICpu, ICompiler} from '../emulator/interfaces';
@@ -18,12 +21,13 @@ import {Constants} from '../globalconstants';
 export class Compiler {
     
     public compilerForm: ControlGroup;
-    public sources: string[] = ["palette scroll"];
+    public sources: string[] = ["palette scroll", "sierpinski triangle", "test comparisons", "test overflow", "test decimal"];
     private pc: AbstractControl;
     private compilerInfo: AbstractControl;
     private selectedSource: AbstractControl;
     
     constructor(
+        private http: Http,
         @Inject(Cpu)public cpu: ICpu,
         @Inject(ConsoleService)private consoleService: IConsoleService,
         @Inject(CompilerService)private compiler: ICompiler) {
@@ -38,7 +42,7 @@ export class Compiler {
         
         this.pc = this.compilerForm.controls["pc"];
         this.compilerInfo = this.compilerForm.controls["compilerInfo"];
-        this.selectedSource = this.compilerForm.controls["selectedSoruce"];  
+        this.selectedSource = this.compilerForm.controls["selectedSource"]; 
     }  
     
     private pcValidator(ctrl: Control): { [s: string]: boolean} {
@@ -50,7 +54,14 @@ export class Compiler {
     }
     
     public loadSource(): void {
-        
+        var url: string = "Source/" + this.selectedSource.value.replace(" ", "_") + ".txt"; 
+        this.consoleService.log("Loading " + url + "...");
+        this.http.get(url)
+            .map(res => res.text())
+            .subscribe(
+                data => (<Control>this.compilerInfo).updateValue(data),
+                err => this.consoleService.log(err),
+                () => this.consoleService.log("Loaded " + url));            
     }  
     
     public setPc(): void {
@@ -62,8 +73,8 @@ export class Compiler {
     public decompile(): void {
         try {
             if (this.pc.valid) {
-                this.compilerInfo.value = this.compiler.decompile(parseInt(this.pc.value, 16));
-                this.compilerInfo.updateValueAndValidity();
+                var str: string = this.compiler.decompile(parseInt(this.pc.value, 16));
+                (<Control>this.compilerInfo).updateValue(str);
             }
         }
         catch (e) {
@@ -74,8 +85,8 @@ export class Compiler {
     public dump(): void {
         try {
             if (this.pc.valid) {
-                this.compilerInfo.value = this.compiler.dump(parseInt(this.pc.value, 16));
-                this.compilerInfo.updateValueAndValidity();
+                var str: string = this.compiler.dump(parseInt(this.pc.value, 16));
+                (<Control>this.compilerInfo).updateValue(str);
             }
         }
         catch (e) {
@@ -86,6 +97,5 @@ export class Compiler {
     public compile(): void {
         var source: string = this.compilerInfo.value;
         this.compiler.compile(source);
-    }
-    
+    }    
 } 

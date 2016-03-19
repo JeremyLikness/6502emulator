@@ -1,7 +1,10 @@
 import {ICompiler, ICpuExtended} from '../emulator/interfaces';
 
+import {EventEmitter} from 'angular2/core';
+
 export interface IConsoleService {
     lines: string[];
+    logEvent: EventEmitter<string>;
     log(message: string);
 }
     

@@ -15,6 +15,7 @@ import {DisplayService} from './services/displayService';
 import {Cpu} from './emulator/cpu';
 import {Constants} from './globalConstants';
 import {FORM_DIRECTIVES} from 'angular2/common';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'emulator',
@@ -33,5 +34,6 @@ bootstrap(AppComponent, [
     CompilerService,
     ConsoleService,
     DisplayService,
+    HTTP_PROVIDERS,
     Cpu
     ]);

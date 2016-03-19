@@ -34,7 +34,8 @@ textarea
 div.column 
 {
     float: left;
-    padding-right: 10px;     
+    padding-right: 5px; 
+    padding-left: 5px;    
 }
 
 div.console 
@@ -48,4 +49,9 @@ div.console
     height: 400px;
     text-overflow: normal;
     padding: 2px;
+}
+
+svg
+{
+    border: solid 3px gray;
 }
