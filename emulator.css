@@ -38,6 +38,11 @@ div.column
     padding-left: 5px;    
 }
 
+div.break
+{
+    clear: all;
+}
+
 div.console 
 {
     overflow: auto;

@@ -1,5 +1,7 @@
 import {Component, Inject, ElementRef} from 'angular2/core'; 
+
 import {IConsoleService} from '../services/interfaces';
+
 import {ConsoleService} from '../services/consoleService';
 
 @Component({
@@ -20,7 +22,7 @@ export class Console {
     ngAfterViewInit() {
         var div = <HTMLDivElement>this.element.nativeElement.getElementsByTagName('div')[0];   
         this.consoleService.logEvent.asObservable().debounceTime(100).subscribe(data => {
-            window.setTimeout(() => div.scrollTop = div.scrollHeight, 0);
+            div.scrollTop = div.scrollHeight;
         }); 
     }
     

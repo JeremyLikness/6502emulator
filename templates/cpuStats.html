@@ -19,5 +19,14 @@
             <button (click)="cpu.run()" [disabled]="cpu.runningState || cpu.errorState">Run</button>
             <input type="checkbox" [(ngModel)]="cpu.debug"/>Debug
             <button (click)="cpu.step()" [disabled]="cpu.runningState || cpu.errorState || !cpu.debug">Step</button>
-            <div>&nbsp;</div>          
+            <div>&nbsp;</div>     
+    <div>
+        <ol>
+            <li>Click "Load" to load a source</li>
+            <li>Click "Compile" to compile it to memory</li>
+            <li>Click "Run" to execute it</li>
+            <li>Check "Debug" and "Step" a line at a time</li>
+            <li>"Reset" to get out of jail free</li>
+        </ol>
+    </div>     
 </div>

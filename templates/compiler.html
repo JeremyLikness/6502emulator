@@ -1,25 +1,27 @@
-<form class="column" [ngFormModel]="compilerForm">                
-    <div>
-        <span>PC: $</span>
-        <input 
-            type="text" 
-            #pcCtrl="ngForm"
-            [attr.placeholder]="cpu.rPC | hexadecimal" 
-            [ngFormControl]="compilerForm.controls['pc']"/>
-        <button (click)="setPc()" [disabled]="!pcCtrl.valid || cpu.runningState">Set</button>
-        <button (click)="compile()" [disabled]="cpu.runningState">Compile</button>
-        <button (click)="decompile()" [disabled]="!pcCtrl.valid">Disassemble</button>
-        <button (click)="dump()" [disabled]="!pcCtrl.valid">Dump</button>
-    </div>
-    <div>
-        <span style="color: red;" *ngIf="!pcCtrl.valid">Enter a valid hexadecimal address between 0 and FFFF.&nbsp;</span>                    
-    </div>
-    <div>&nbsp;</div>
-    <div>Source: <select [ngFormControl]="compilerForm.controls['selectedSource']" >
-            <option *ngFor="#src of sources" [id]="src" [selected]="src === selectedSource">{{src}}</option>
-        </select>&nbsp;
-        <button (click)="loadSource()">Load</button>
-    </div>
-    <div>&nbsp;</div>
-    <textarea [ngFormControl]="compilerForm.controls['compilerInfo']"></textarea>
-</form>
+<div class="column">
+    <form [ngFormModel]="compilerForm">                
+        <div>
+            <span>PC: $</span>
+            <input 
+                type="text" 
+                #pcCtrl="ngForm"
+                [attr.placeholder]="cpu.rPC | hexadecimal" 
+                [ngFormControl]="compilerForm.controls['pc']"/>
+            <button (click)="setPc()" [disabled]="!pcCtrl.valid || cpu.runningState">Set</button>
+            <button (click)="compile()" [disabled]="cpu.runningState">Compile</button>
+            <button (click)="decompile()" [disabled]="!pcCtrl.valid">Disassemble</button>
+            <button (click)="dump()" [disabled]="!pcCtrl.valid">Dump</button>
+        </div>
+        <div>
+            <span style="color: red;" *ngIf="!pcCtrl.valid">Enter a valid hexadecimal address between 0 and FFFF.&nbsp;</span>                    
+        </div>
+        <div>&nbsp;</div>
+        <div>Source: <select [ngFormControl]="compilerForm.controls['selectedSource']" >
+                <option *ngFor="#src of sources" [id]="src" [selected]="src === selectedSource">{{src}}</option>
+            </select>&nbsp;
+            <button (click)="loadSource()">Load</button>
+        </div>
+        <div>&nbsp;</div>
+        <textarea [ngFormControl]="compilerForm.controls['compilerInfo']"></textarea>
+    </form>
+</div>

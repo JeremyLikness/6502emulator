@@ -6,7 +6,7 @@ export interface IConsoleService {
     lines: string[];
     logEvent: EventEmitter<string>;
     log(message: string);
-}
+} 
     
 export interface ICpuService {
     getCpu(): ICpuExtended;    

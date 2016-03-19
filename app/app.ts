@@ -1,5 +1,7 @@
 import {Component, Inject, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
+import {FORM_DIRECTIVES} from 'angular2/common';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {Console} from './components/console';
 import {CpuStats} from './components/cpuStats';
@@ -8,14 +10,13 @@ import {Compiler} from './components/compiler';
 
 import {Compiler as CompilerService} from './emulator/compiler';
 import {OpCodes} from './emulator/opsCodes';
+import {Cpu} from './emulator/cpu';
 
 import {IConsoleService} from './services/interfaces';
 import {ConsoleService} from './services/consoleService';
 import {DisplayService} from './services/displayService';
-import {Cpu} from './emulator/cpu';
+
 import {Constants} from './globalConstants';
-import {FORM_DIRECTIVES} from 'angular2/common';
-import {HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'emulator',

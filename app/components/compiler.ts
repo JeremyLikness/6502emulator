@@ -5,11 +5,14 @@ import {Http} from 'angular2/http';
 import 'rxjs/Rx';
 
 import {Hexadecimal} from '../pipes/hexadecimal';
+
 import {ICpu, ICompiler} from '../emulator/interfaces';
 import {Cpu} from '../emulator/cpu';
 import {Compiler as CompilerService} from '../emulator/compiler';
+
 import {IConsoleService} from '../services/interfaces';
 import {ConsoleService} from '../services/consoleService';
+
 import {Constants} from '../globalconstants';
 
 @Component({
@@ -28,12 +31,12 @@ export class Compiler {
     
     constructor(
         private http: Http,
+        private fb: FormBuilder,
         @Inject(Cpu)public cpu: ICpu,
         @Inject(ConsoleService)private consoleService: IConsoleService,
         @Inject(CompilerService)private compiler: ICompiler) {
         
-        var fb = new FormBuilder();
-        this.compilerForm = fb.group({
+        this.compilerForm = this.fb.group({
             'pc': [Constants.Memory.DefaultStart.toString(16).toUpperCase(), 
                 Validators.compose([Validators.required, this.pcValidator])],
             'compilerInfo': ['', Validators.required],

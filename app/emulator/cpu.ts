@@ -1,11 +1,14 @@
 import {Inject, Injectable} from 'angular2/core';
 
 import {OpCodes} from './opscodes';
+
 import {IConsoleService, IDisplayService} from '../services/interfaces';
 import {ConsoleService} from '../services/consoleService';
 import {DisplayService} from '../services/displayService';
-import {Constants} from '../globalConstants';
+
 import {IOperation, ICpuExtended} from './interfaces';
+
+import {Constants} from '../globalConstants';
 
 @Injectable()
 export class Cpu implements ICpuExtended {

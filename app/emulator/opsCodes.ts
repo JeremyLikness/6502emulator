@@ -1,5 +1,7 @@
 import {InvalidOp, registeredOperations as ops} from './opCodes';
+
 import {Constants} from '../globalConstants';
+
 import {IOperation, ICpu} from '../emulator/interfaces';
 
 export class OpCodes {

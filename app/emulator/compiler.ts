@@ -2,10 +2,14 @@ import {Injectable, Inject} from 'angular2/core';
 
 import {InvalidOp} from './opCodes';
 import {OpCodes} from './opsCodes';
+
 import {IConsoleService} from '../services/interfaces';
 import {ConsoleService} from '../services/consoleService';
+
 import {ICpu, ICpuExtended, ICompiledLine, ICompilerResult, ILabel, ICompiler, IOperation} from './interfaces';
+
 import {Cpu} from './cpu';
+
 import {Constants} from '../globalConstants';
 
 @Injectable()
