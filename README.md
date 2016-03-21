@@ -2,7 +2,7 @@
 
 Emulator for the 6502 chipset written with TypeScript and Angular 2.
 
-Visit [my blog](http://csharperimage.jeremylikness.com/) for regular Angular articles.
+Read a detailed explanation of building this emulator [here](http://csharperimage.jeremylikness.com/2016/03/lessons-learned-re-writing-6502.html).
 
 Try out a working version of the emulator [here](http://apps.jeremylikness.com/apps/6502ng2/).
 
